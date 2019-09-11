@@ -1,0 +1,178 @@
+/* ---------- root variables ---------- */
+:root {
+  --coin-orange: #f8b475;
+  --mint: #89ffdb;
+  --magenta: #e42f9b;
+  --baby-blue: #77bcff;
+  --blue: #4585FF;
+  --yellow: #FFC529;
+  --grey: #EFEFEF;
+  --lavender: #625ce0;
+
+}
+
+
+
+
+
+html, body{
+  width: 100%;
+  background-color: var(--grey);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.section{
+height: 100vh;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("../img/login-background.svg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+input, button{
+  width: 65vw;
+  margin-top: 3%;
+  padding: 2%;
+  border: 0px solid black;
+  border-radius: 40px;
+  box-shadow: 6px 7px 7px -1px rgba(0,0,0,0.26);
+}
+
+input{
+  font-size: 20px;
+  padding: 2% 2% 2% 7%;
+}
+
+button{
+  margin-bottom: 4%;
+}
+
+#loginForm p{
+  font-size: 18px;
+}
+
+#newAccountButton {
+  color: var(--baby-blue);
+  text-align: center;
+  float: right;
+  width: 35vw ;
+  margin-top: 2vh;
+  margin-right: 10vw;
+  padding: 2%;
+  background-color: white;
+  border-radius: 40px;
+  display: block;
+  font-weight: 400;
+  box-shadow: 6px 7px 7px -1px rgba(0,0,0,0.26);
+
+}
+
+.copyright p{
+  color: var(--baby-blue);
+  margin: 2% 2% 2% 4%;
+  font-size: 15px;
+}
+
+.btn-blue{
+  background-color: var(--blue);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn-rounded{
+  border-radius: 40px;
+  border: 0px solid black;
+box-shadow: 5px 10px red;
+}
+
+#logo {
+margin-top: 3vh;
+  width: 60vw;
+}
+
+h1{
+  font-family: "Futura",sans-serif;
+  font-weight: normal;
+  font-size: 50px;
+  letter-spacing: 2px;
+}
+
+#coin1,#coin2 {
+     width: 35px;
+     height: 35px;
+     background: var(--coin-orange);
+     border-radius: 50%;
+
+     margin: 0 auto;
+     position: relative;
+
+}
+#coin1{
+  animation-name: floating1;
+  animation-duration: 3s;
+  animation-iteration-count: 5;
+  left:-1vh;
+  top:2vh;
+}
+
+#coin2{
+  animation-name: floating2;
+  animation-duration: 3s;
+  animation-iteration-count: 5;
+  left:-0.5vh;
+  top: 1vh;
+
+}
+
+@keyframes floating1 {
+  0%   { left:-1vh; top:-1vh;}
+  50%   { left:-1vh; top:7.5vh;}
+  100%   { left:-1vh; top:-1vh;}
+}
+
+@keyframes floating2 {
+  0%   { left:3vh; top:1vh;}
+  25%   { left:3vh; top:4vh;}
+  75%   { left:3vh; top:-2vh;}
+  100%   { left:3vh; top:1vh;}
+}
+
+
+
+
+
+.vh-5{
+  height: 5vh;
+}
+
+.vh-10{
+  height: 10vh;
+}
+
+
+.vh-35{
+  height: 35vh;
+}
+
+
+.vh-45{
+  height: 45vh;
+}
+
+.vh-50{
+  height: 50vh;
+}
+
+b{
+color: var(--blue);
+}
