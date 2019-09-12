@@ -16,7 +16,6 @@ function showPage(pageId) {
   setActiveTab(pageId);
 }
 
-showPage(loginPage);
 // sets active tabbar/ menu item
 function setActiveTab(pageId) {
   let pages = document.querySelectorAll(".tabbar a");
@@ -39,7 +38,7 @@ function setDefaultPage() {
   showPage(page);
 }
 
-
+setDefaultPage();
 // function showLoader(show) {
 //   let loader = document.querySelector('#loader');
 //   if (show) {
@@ -65,6 +64,42 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const billRef = db.collection("bills");
 const postRef = db.collection("posts");
+const userRef = db.collection("users");
+
+
+// Firebase UI configuration
+const uiConfig = {
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  signInSuccessUrl: '#expensesPage',
+};
+
+
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+
+
+// Listen on authentication state change
+firebase.auth().onAuthStateChanged(function(user) {
+  let tabbar = document.querySelector('#tabbar-footer');
+  console.log(user);
+  if (user) { // if user exists and is authenticated
+    setDefaultPage();
+    tabbar.classList.remove("hide");
+  } else { // if user is not logged in
+    showPage("loginPage");
+    tabbar.classList.add("hide");
+    ui.start('#firebaseui-auth-container', uiConfig);
+  }
+});
+
+
+// sign out user
+function logout() {
+  firebase.auth().signOut();
+}
 
 // ========== BILLS ==========
 // watch the database ref for changes
@@ -73,17 +108,24 @@ billRef.onSnapshot(function(snapshotData) {
   appendBills(bills);
 });
 
-// append bills to the DOM
-function appendBills(bills) {
+// append posts to the DOM
+function appendBill(bills) {
   let htmlTemplate = "";
   for (let bill of bills) {
     console.log(bill.id);
     htmlTemplate += `
-    <article class="whiteContainer">
-      <h2>${bill.data().billTitle}</h2>
-      <p>${bill.data().billPost}</p>
-      <p>${bill.data().billAmount}</p>
-      <p>${bill.data().billCurrency}</p>
+    <article class="row entry">
+        <div class="col-2">
+          <div class="billImage">
+          </div>
+        </div>
+        <div class="col-6 text-left">
+          <h4>${bill.data().billTitle}</h4>
+          <span class="tag">${bill.data().chosenPost}</span>
+        </div>
+        <div class="col-4">
+          <h5>${bill.data().billAmount} ${bill.data().chosenCurrency}</h5>
+        </div>
     </article>
     `;
   }
@@ -123,10 +165,20 @@ function appendPosts(posts) {
   for (let post of posts) {
     console.log(post.id);
     htmlTemplate += `
-    <article class="whiteContainer">
-      <h2>${post.data().postTitle}</h2>
-      <p>${post.data().postAmount}</p>
-      <p>${post.data().budgetSheet}</p>
+    <article class="row entry">
+        <div class="col-2">
+          <div class="billImage">
+
+          </div>
+        </div>
+        <div class="col-6 text-left">
+          <h4>${post.data().postTitle}</h4>
+          <span class="tag">${post.data().budgetSheet}</span>
+        </div>
+        <div class="col-4">
+          <h5>${post.data().postAmount} ${post.data().billCurrencyt}</h5>
+        </div>
+
     </article>
     `;
   }

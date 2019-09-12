@@ -8,55 +8,148 @@
   --yellow: #FFC529;
   --grey: #EFEFEF;
   --lavender: #625ce0;
-
 }
 
-
-
-
-
-html, body{
+/* ---------- WHOLE DOCUMENT ---------- */
+html, body {
   width: 100%;
   background-color: var(--grey);
   font-family: 'Open Sans', sans-serif;
+  overflow-x: auto;
 }
 
-.section{
-height: 100vh;
+header{
+  display: block;
 }
 
-.bg {
+.section {
+  height: 100vh;
+}
+
+h1 {
+  font-family: "Futura", sans-serif;
+  font-weight: normal;
+  font-size: 50px;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.tag{
+  background-color: var(--magenta);
+  border-radius: 12px;
+  padding: 1% 3%;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+
+}
+
+.btn-blue {
+  background-color: var(--blue);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn-rounded {
+  border-radius: 40px;
+  border: 0px solid black;
+}
+
+.whiteContainer {
+  width: 98vw;
+  margin: auto;
+  padding: 2%;
+  background-color: white;
+  border-radius: 40px;
+  display: block;
+  box-shadow: 6px 7px 7px -1px rgba(0, 0, 0, 0.26);
+}
+
+.vh-5 {
+  height: 5vh;
+}
+
+.vh-10 {
+  height: 10vh;
+}
+
+.vh-15 {
+  height: 15vh;
+}
+
+.vh-20 {
+  height: 20vh;
+}
+
+.vh-25 {
+  height: 25vh;
+}
+
+.vh-30 {
+  height: 30vh;
+}
+
+.vh-35 {
+  height: 35vh;
+}
+
+.vh-45 {
+  height: 45vh;
+}
+
+.vh-50 {
+  height: 50vh;
+}
+
+.vh-70 {
+  height: 70vh;
+}
+
+b {
+  color: var(--blue);
+}
+
+
+
+/* ---------- LOGIN PAGE ---------- */
+.bg-login {
   /* The image used */
   background-image: url("../img/login-background.svg");
-
   /* Full height */
   height: 100%;
-
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-input, button{
+input, button {
   width: 65vw;
   margin-top: 3%;
   padding: 2%;
   border: 0px solid black;
   border-radius: 40px;
-  box-shadow: 6px 7px 7px -1px rgba(0,0,0,0.26);
+  box-shadow: 6px 7px 7px -1px rgba(0, 0, 0, 0.26);
 }
 
-input{
+input {
   font-size: 20px;
   padding: 2% 2% 2% 7%;
 }
 
-button{
+button {
   margin-bottom: 4%;
 }
 
-#loginForm p{
+.form p {
   font-size: 18px;
 }
 
@@ -64,7 +157,7 @@ button{
   color: var(--baby-blue);
   text-align: center;
   float: right;
-  width: 35vw ;
+  width: 35vw;
   margin-top: 2vh;
   margin-right: 10vw;
   padding: 2%;
@@ -72,107 +165,269 @@ button{
   border-radius: 40px;
   display: block;
   font-weight: 400;
-  box-shadow: 6px 7px 7px -1px rgba(0,0,0,0.26);
-
+  box-shadow: 6px 7px 7px -1px rgba(0, 0, 0, 0.26);
 }
 
-.copyright p{
+.copyright p {
   color: var(--baby-blue);
   margin: 2% 2% 2% 4%;
   font-size: 15px;
 }
 
-.btn-blue{
-  background-color: var(--blue);
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.btn-rounded{
-  border-radius: 40px;
-  border: 0px solid black;
-box-shadow: 5px 10px red;
-}
-
 #logo {
-margin-top: 3vh;
+  margin-top: 3vh;
   width: 60vw;
 }
 
-h1{
-  font-family: "Futura",sans-serif;
-  font-weight: normal;
-  font-size: 50px;
-  letter-spacing: 2px;
+#coin1, #coin2 {
+  width: 35px;
+  height: 35px;
+  background: var(--coin-orange);
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
 }
 
-#coin1,#coin2 {
-     width: 35px;
-     height: 35px;
-     background: var(--coin-orange);
-     border-radius: 50%;
-
-     margin: 0 auto;
-     position: relative;
-
-}
-#coin1{
+#coin1 {
   animation-name: floating1;
-  animation-duration: 3s;
-  animation-iteration-count: 5;
-  left:-1vh;
-  top:2vh;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  left: -1vh;
+  top: 2vh;
 }
 
-#coin2{
+#coin2 {
   animation-name: floating2;
-  animation-duration: 3s;
-  animation-iteration-count: 5;
-  left:-0.5vh;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  left: -0.5vh;
   top: 1vh;
-
 }
 
 @keyframes floating1 {
-  0%   { left:-1vh; top:-1vh;}
-  50%   { left:-1vh; top:7.5vh;}
-  100%   { left:-1vh; top:-1vh;}
+  0% {
+    left: -1vh;
+    top: -1vh;
+  }
+
+  50% {
+    left: -1vh;
+    top: 7.5vh;
+  }
+
+  100% {
+    left: -1vh;
+    top: -1vh;
+  }
 }
 
 @keyframes floating2 {
-  0%   { left:3vh; top:1vh;}
-  25%   { left:3vh; top:4vh;}
-  75%   { left:3vh; top:-2vh;}
-  100%   { left:3vh; top:1vh;}
+  0% {
+    left: 3vh;
+    top: 1vh;
+  }
+
+  25% {
+    left: 3vh;
+    top: 4vh;
+  }
+
+  75% {
+    left: 3vh;
+    top: -2vh;
+  }
+
+  100% {
+    left: 3vh;
+    top: 1vh;
+  }
+}
+
+/* ---------- CREATE ACCOUNT PAGE ---------- */
+#goBackButton {
+  color: var(--baby-blue);
+  text-align: center;
+  float: right;
+  width: 35vw;
+  margin-top: 2vh;
+  margin-right: 10vw;
+  padding: 2%;
+  background-color: white;
+  border-radius: 40px;
+  display: block;
+  font-weight: 400;
+  box-shadow: 6px 7px 7px -1px rgba(0, 0, 0, 0.26);
+}
+
+#yellowText {
+  color: var(--yellow);
+  font-weight: 500;
+}
+
+.bg-create {
+  /* The image used */
+  background-image: url("../img/new-account-background.svg");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#newAccountPage h1 {
+  margin-top: 11vh;
+}
+
+/* ---------- EXPENSES PAGE ---------- */
+#expensesPage{
+    margin-bottom: 10vh
+}
+
+.banner {
+  background-color: var(--blue);
+  color: white;
+}
+
+.banner h2 {
+  font-size: 22px;
+  margin: auto;
+  font-weight: bold;
 }
 
 
 
-
-
-.vh-5{
-  height: 5vh;
+#bills {
+  overflow-y: scroll;
 }
 
-.vh-10{
-  height: 10vh;
+#monthlyOverview {
+  height: 46vh;
+}
+
+#recentActivities {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#recentActivities button {
+  width: 30vh;
+}
+
+.entry {
+  width: 98vw;
+  height: 7vh;
+  margin: auto;
+  background-color: white;
+  border-radius: 20px;
+margin-top: 2%;
+
+}
+
+#bill-container{
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.col-image {
+  width: 10%;
+  display: inline-block;
+
+}
+
+.billImage{
+  border: 1px solid red;
+  margin-top: 12%;
+  background-image: url("../img/piggy.png");
+  /* Full height */
+
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.col-description {
+  width: 58%;
+  display: inline-block;
+
+}
+
+.col-amount {
+  width: 30%;
+  display: inline-block;
+}
+
+#bills h4{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 2% 0 0 0;
+}
+
+#bills h5{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 13% 0 0 0;
+  color: darkred;
+}
+
+article{
+  margin: 10% 0;
 }
 
 
-.vh-35{
-  height: 35vh;
+/* ---------- NEW BILL---------- */
+#addBillForm{
+  margin-top: 5vh;
+  height: 70vh;
+}
+
+.btn-grey{
+  background: #c9c9c9;
+  width: 50%;
+}
+
+#newBillPage button{
+  margin: 1vh;
+}
+
+#newBillPage label{
 }
 
 
-.vh-45{
-  height: 45vh;
+/* ---------- FOOTER ---------- */
+
+#tabbar-footer{
+  position: fixed;
+  background-color: white;
+  bottom: 0;
+  width: 100vw;
+  height: 7vh;
+  justify-content: space-around;
 }
 
-.vh-50{
-  height: 50vh;
+#tabbar-footer a{
+  height: 7vh;
+  width: 25%;
+  padding-top: 1%;
 }
 
-b{
-color: var(--blue);
+#tabbar-footer a:hover{
+background-color: var(--baby-blue);
+
+}
+
+#tabbar-footer img{
+  width: 5vh;
+}
+
+.hide{
+  display: none;
 }
