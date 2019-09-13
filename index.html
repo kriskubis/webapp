@@ -15,16 +15,7 @@
 
 <body>
   <header>
-    <nav id="tabbar" class="tabbar hide">
-      <a href="#loginPage" onclick="showPage('loginPage')">login</a>
-      <a href="#newAccountPage" onclick="showPage('newAccountPage')">createt</a>
-      <a href="#expensesPage" onclick="showPage('expensesPage')">expsenses overview</a>
-      <a href="#newBillPage" onclick="showPage('newBillPage')">New Billt</a>
-    </nav>
-      <a href="#budgetPage" onclick="showPage('budgetPage')">Budget</a>
-      <a href="#newPostPage" onclick="showPage('newBillPage')">New Post</a>
-      <a href="#converterPage" onclick="showPage('converterPage')">Convert</a>
-    </nav>
+
   </header>
 
   <main id="pages">
@@ -55,9 +46,9 @@
           <div class="form">
             <form>
               <!--<button type="button" name="button" onclick="logIn()">Log</button>-->
-              <input id="username" class="whiteField" type="text" placeholder="Username" required></input>
+              <input id="email" class="whiteField" type="text" placeholder="Email" required></input>
               <input id="password" class="whiteField" type="password" placeholder="Password" required></input>
-              <button class="btn-blue" type="button" name="button">Log In</button>
+              <button class="btn-blue" type="button" onclick="logInUser()" name="button">Log In</button>
             </form>
             <p>or <br> Log in with <a href="facebook.com"><b>Facebook</b></a></p>
           </div>
@@ -90,7 +81,7 @@
                 <input id="createUsername" class="whiteField" type="text" placeholder="Username" required></input>
                 <input id="createPassword" class="whiteField" type="password" placeholder="Password" required></input>
                 <input id="createEmail" class="whiteField" type="mail" placeholder="E-mail" required></input>
-                <button class="btn-blue" type="button" name="button" onclick="createAcount()">Create</button>
+                <button class="btn-blue" type="button" name="button" onclick="createUser()">Create</button>
               </form>
               <p>or <br> Log in with <a href="facebook.com"><b>Facebook</b></a></p>
             </div>
@@ -116,158 +107,186 @@
         <div class="row">
           <div id="recentActivities">
             <h3>Recent Activity</h3>
-            <button type="button" class="btn-blue" onclick="showPage('budgetPage')" name="button">Add new bill</button>
+            <button type="button" class="btn-blue" onclick="showPage('newBillPage')" name="button">Add new bill</button>
           </div>
         </div>
-        <div class="row vh-25">
+        <div id="overview" class="row">
+          <h4>Friday 6th</h4>
           <section id="bills" class="bill-container text-center">
-            <h4>Friday 6th</h4>
-            <article class="row entry">
-                <div class="col-2">
-                  <div class="billImage">
-                  </div>
-                </div>
-                <div class="col-6 text-left">
-                  <h4>Lunch</h4>
-                  <span class="tag">Food</span>
-                </div>
-                <div class="col-4">
-                  <h5>75.00 DKK</h5>
-                </div>
-            </article>
-
-
-            <article class="row entry">
-                <div class="col-2">
-                  <div class="billImage">
-                  </div>
-                </div>
-                <div class="col-6 text-left">
-                  <h4>Lunch</h4>
-                  <span class="tag">Food</span>
-                </div>
-                <div class="col-4">
-                  <h5>75.00 DKK</h5>
-                </div>
-            </article>
-
-
-            <article class="row entry">
-                <div class="col-2">
-                  <div class="billImage">
-                  </div>
-                </div>
-                <div class="col-6 text-left">
-                  <h4>Lunch</h4>
-                  <span class="tag">Food</span>
-                </div>
-                <div class="col-4">
-                  <h5>75.00 DKK</h5>
-                </div>
-            </article>
-
-
-
-            <article class="row entry">
-                <div class="col-2">
-                  <div class="billImage">
-                  </div>
-                </div>
-                <div class="col-6 text-left">
-                  <h4>Lunch</h4>
-                  <span class="tag">Food</span>
-                </div>
-                <div class="col-4">
-                  <h5>75.00 DKK</h5>
-                </div>
-            </article>
-
-
-            <article class="row entry">
-                <div class="col-2">
-                  <div class="billImage">
-                  </div>
-                </div>
-                <div class="col-6 text-left">
-                  <h4>Lunch</h4>
-                  <span class="tag">Food</span>
-                </div>
-                <div class="col-4">
-                  <h5>75.00 DKK</h5>
-                </div>
-            </article>
           </section>
         </div>
-
       </div>
     </section>
 
     <!-- New bill page -->
     <section id="newBillPage" class="page">
       <div class="container-fluid">
-      <div class="row banner vh-5 mrg-btm">
-        <h2>New bill</h2>
-      </div>
-      <div class="row vh-90">
-      <div id="addBillForm" class="whiteContainer">
-        <form id="billForm">
-          <div class="row text-center">
+        <div class="row banner vh-5 mrg-btm">
+          <h2>New bill</h2>
+        </div>
+        <div class="row vh-90">
+          <div id="addBillForm" class="whiteContainer">
+            <form id="billForm">
+              <div class="row text-center">
+                <label>Bill title *</label>
+                <input type="text" id="billTitle" required>
+              </div>
 
-
-          <label>Bill title *</label>
-          <input type="text" id="billTitle" required>
-
-</div>
-            <div class="row">
-          <label>Amount *</label>
-          <input type="number" id="billAmount" required>
-</div>
               <div class="row">
-                  <div class="col-6">
-          <label>Pick a post *</label>
-          <select id="chosenPost" required>
-            <option value="food">Food</option>
-          </select>
-        </div>
-        <div class="col-6">
-          <label>Currency *</label>
-          <select id="chosenCurrency" required>
-            <option value="DKK">DKK</option>
-          </select>
+                <label>Amount *</label>
+                <input type="number" id="billAmount" required>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label>Pick a post *</label>
+                  <select id="chosenPost" required>
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Leisure">Leisure</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
+                <div class="col-6">
+                  <label>Currency *</label>
+                  <select id="chosenCurrency" required>
+                    <option value="AUD">AUD</option>
+                    <option value="DKK">DKK</option>
+                    <option value="EUR">EUR</option>
+                    <option value="SVK">SVK</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" class="btn-round btn-blue" name="button" onclick="addBill()">Add</button>
+              <button type="button" name="button" class="btn-round btn-grey" onclick="showPage('expensesPage')">Cancel</button>
+            </form>
+          </div>
         </div>
-          <button type="button" class="btn-round btn-blue" name="button" onclick="addBill()">Add</button>
-          <button type="button"  name="button" class="btn-round btn-grey" onclick="showPage('expensesPage')">Cancel</button>
-        </form>
+        <div class="row copyright vh-5">
+          <p>&copy; 2019, PiggyCo.</p>
+        </div>
       </div>
-            </div>
-            <div class="row copyright vh-5">
-              <p>&copy; 2019, PiggyCo.</p>
-            </div>
-        </div>
     </section>
 
     <!-- Budget page -->
     <section id="budgetPage" class="page">
+      <div class="row banner vh-5 mrg-btm">
+        <h2>Budget</h2>
+      </div>
       <div id="budgetGraph" class="whiteContainer"></div>
       <div id="budgetPosts">
+        <section id="defaultPosts" class="defaultPost-container">
+          <div class="row">
+            <div class="col-8">Post</div>
+            <div class="col-2">DKK</div>
+            <div class="col-2">EUR</div>
+          </div>
+          <article class="row entry income">
+              <div class="col-8 text-left">
+                <h4>SU</h4>
+              </div>
+              <div class="col-2">
+                <h5>5200</h5>
+              </div>
+              <div class="col-2">
+                <h5>0</h5>
+              </div>
+          </article>
+
+          <article class="row entry income">
+              <div class="col-8 text-left">
+                <h4>Salary</h4>
+              </div>
+              <div class="col-2">
+                <h5>1200</h5>
+              </div>
+              <div class="col-2">
+                <h5>0</h5>
+              </div>
+          </article>
+
+          <article class="row entry expense">
+              <div class="col-8 text-left">
+                <h4>Rent</h4>
+              </div>
+              <div class="col-2">
+                <h5>3800</h5>
+              </div>
+              <div class="col-2">
+                <h5>0</h5>
+              </div>
+          </article>
+
+          <article class="row entry expense">
+              <div class="col-8 text-left">
+                <h4>Food</h4>
+              </div>
+              <div class="col-2">
+                <h5>1910</h5>
+              </div>
+              <div class="col-2">
+                <h5>130</h5>
+              </div>
+          </article>
+
+          <article class="row entry expense">
+              <div class="col-8 text-left">
+                <h4>Transportation</h4>
+              </div>
+              <div class="col-2">
+                <h5>600</h5>
+              </div>
+              <div class="col-2">
+                <h5>400</h5>
+              </div>
+          </article>
+
+          <article class="row entry expense">
+              <div class="col-8 text-left">
+                <h4>Utilities</h4>
+              </div>
+              <div class="col-2">
+                <h5>200</h5>
+              </div>
+              <div class="col-2">
+                <h5>0</h5>
+              </div>
+          </article>
+
+        </section>
         <section id="posts" class="post-container"></section>
-        <a href="#addPostPage" class="button">Add new post</a>
+        <div class="row">
+          <div class="text-center">
+            <button type="button" class="btn-blue" onclick="showPage('newPostPage')" name="button">Add new post</button>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- New post page -->
     <section id="newPostPage" class="page">
+      <div class="row banner vh-5 mrg-btm">
+        <h2>New budget post</h2>
+      </div>
       <div class="whiteContainer">
         <form id="postForm">
           <h2>Add new post</h2>
           <label>Post title *</label>
           <input type="text" id="postTitle" required>
           <label>Amount *</label>
-          <input type="number" id="postAmount" required>
+          <input type="number" id="postAmount1" required>
+          <label>Amount *</label>
+          <input type="number" id="postAmount2" required>
           <label>Pick a budget sheet *</label>
           <select id="chosenSheet" required>
-            <option value="main">Main</option>
+            <option value="Main">Main</option>
+            <option value="Leisure">Leisure</option>
+            <option value="Medical">Medical</option>
+          </select>
+          <label>Type *</label>
+          <select id="postExpense" required>
+            <option value="Expense">Expense</option>
+            <option value="Income">Income</option>
           </select>
           <!-- <input type="checkbox" id="income" placeholder="" required> -->
           <button type="button" name="button" onclick="addPost()">Add</button>
@@ -278,6 +297,9 @@
 
     <!-- Converter page -->
     <section id="converterPage" class="page">
+    <div class="row banner vh-5 mrg-btm">
+      <h2>Converter</h2>
+    </div>
       <div class="whiteContainer">
         <form id="convertForm">
           <h2>Convert</h2>
@@ -293,29 +315,26 @@
         </form>
       </div>
     </section>
+
+
+<!-- Settings page -->
+    <section id="settingsPage" class="page text-center">
+      <div class="row banner vh-5 mrg-btm">
+        <h2>Settings</h2>
+      </div>
+      <img src="img/settings.svg" alt="" class="vw-100">
+    </section>
+
+
   </main>
 
   <footer>
     <nav id="tabbar-footer" class="tabbar hide">
-<div class="row text-center">
-
-
-
-
-
-
-      <a href="#expensesPage" onclick="showPage('expensesPage')"><img src="img/expenses.png"></a>
-
-
-
-      <a href="#budgetPage" onclick="showPage('budgetPage')"><img src="img/budget.png"></a>
-
-
-      <a href="#converterPage" onclick="showPage('converterPage')"><img src="img/converter.png"></a>
-
-
-      <a href="#converterPage" onclick="showPage('settingsPage')"><img src="img/settings.png"></a>
-
+      <div class="row text-center">
+        <a href="#expensesPage" onclick="showPage('expensesPage')"><img src="img/expenses.png"></a>
+        <a href="#budgetPage" onclick="showPage('budgetPage')"><img src="img/budget.png"></a>
+        <a href="#converterPage" onclick="showPage('converterPage')"><img src="img/converter.png"></a>
+        <a href="#settingsPage" onclick="showPage('settingsPage')"><img src="img/settings.png"></a>
       </div>
     </nav>
   </footer>
@@ -330,7 +349,7 @@
   <!-- Firebase Firestore (database) JS SDK -->
   <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
-<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <!-- main js file -->
   <script src="js/main.js"></script>
 </body>

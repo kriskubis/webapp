@@ -31,7 +31,7 @@ function setActiveTab(pageId) {
 
 // set default page
 function setDefaultPage() {
-  let page = "loginPage";
+  var page = "loginPage";
   if (location.hash) {
     page = location.hash.slice(1);
   }
@@ -101,12 +101,15 @@ function logout() {
   firebase.auth().signOut();
 }
 
-// ========== BILLS ==========
+// ========== CREATE BILLS ==========
 // watch the database ref for changes
-billRef.onSnapshot(function(snapshotData) {
+
+billRef.orderBy("time","desc").onSnapshot(function(snapshotData) {
   let bills = snapshotData.docs;
-  appendBills(bills);
+  appendBill(bills);
 });
+
+
 
 // append posts to the DOM
 function appendBill(bills) {
@@ -120,11 +123,11 @@ function appendBill(bills) {
           </div>
         </div>
         <div class="col-6 text-left">
-          <h4>${bill.data().billTitle}</h4>
-          <span class="tag">${bill.data().chosenPost}</span>
+          <h4>${bill.data().title}</h4>
+          <span class="tag ${bill.data().post}">${bill.data().post}</span>
         </div>
         <div class="col-4">
-          <h5>${bill.data().billAmount} ${bill.data().chosenCurrency}</h5>
+          <h5>${bill.data().amount} ${bill.data().currency}</h5>
         </div>
     </article>
     `;
@@ -132,79 +135,121 @@ function appendBill(bills) {
   document.querySelector('#bills').innerHTML = htmlTemplate;
 }
 
-// ========== CREATE ==========
+
+// ========== CREATE  BILLS==========
 // add a new user to firestore (database)
 function addBill() {
   // references to the input fields
-  let billTitleInput = document.querySelector('#billTitle');
-  let billPostInput = document.querySelector('#billPost');
-  let billAmountInput = document.querySelector('#billAmount');
-  let billCurrencyInput = document.querySelector('#billCurrency');
+  let billTitleInput = document.querySelector('#billTitle').value;
+  let billPostInput = document.querySelector('#chosenPost').value;
+  let billAmountInput = document.querySelector('#billAmount').value;
+  let billCurrencyInput = document.querySelector('#chosenCurrency').value;
+  let timestamp = firebase.firestore.FieldValue.serverTimestamp();
   console.log(billTitleInput.value);
 
-  let newBill = {
-    billTitle: billTitleInput.value,
-    billPost: billPostInput.value,
-    billAmount: billAmountInput.value,
-    billCurrency: billCurrencyInput.value,
-  };
-
-  billRef.add(newBill);
+  db.collection("bills").add ({
+    title: billTitleInput,
+    amount: billAmountInput,
+    post: billPostInput,
+    currency: billCurrencyInput,
+    time: timestamp,
+  });
+  var page = "expensesPage";
+  showPage(page);
 }
+
 
 // ========== POSTS ==========
 // watch the database ref for changes
 postRef.onSnapshot(function(snapshotData) {
   let posts = snapshotData.docs;
-  appendPosts(posts);
+  appendPost(posts);
 });
 
 // append posts to the DOM
-function appendPosts(posts) {
+function appendPost(posts) {
   let htmlTemplate = "";
   for (let post of posts) {
-    console.log(post.id);
+    console.log(post.data().title);
     htmlTemplate += `
-    <article class="row entry">
+    <article class="row entry ${post.data().expense}">
+        <div class="col-8 text-left">
+          <h4>${post.data().title}</h4>
+        </div>
         <div class="col-2">
-          <div class="billImage">
-
-          </div>
+          <h5>${post.data().amount1}</h5>
         </div>
-        <div class="col-6 text-left">
-          <h4>${post.data().postTitle}</h4>
-          <span class="tag">${post.data().budgetSheet}</span>
+        <div class="col-2">
+          <h5>${post.data().amount2}</h5>
         </div>
-        <div class="col-4">
-          <h5>${post.data().postAmount} ${post.data().billCurrencyt}</h5>
-        </div>
-
     </article>
     `;
   }
   document.querySelector('#posts').innerHTML = htmlTemplate;
 }
 
-// ========== CREATE ==========
+// ========== CREATE POST ==========
 // add a new user to firestore (database)
 function addPost() {
   // references to the input fields
-  let postTitleInput = document.querySelector('#postTitle');
-  let postAmountInput = document.querySelector('#postAmount');
-  let postBudgetSheetInput = document.querySelector('#budgetSheet');
+  let postTitleInput = document.querySelector('#postTitle').value;
+  let postAmountInput1 = document.querySelector('#postAmount1').value;
+  let postAmountInput2 = document.querySelector('#postAmount2').value;
+  let postExpenseInput = document.querySelector('#postExpense').value;
+  let chosenSheetInput = document.querySelector('#chosenSheet').value;
   //let postIncomeInput = document.querySelector('#postIncome');
   console.log(postTitleInput.value);
 
   let newPost = {
-    postTitle: postTitleInput.value,
-    postAmount: postAmountInput.value,
-    postBudgetSheet: postBudgetSheetInput.value,
+    title: postTitleInput,
+    amount1: postAmountInput1,
+    amount2: postAmountInput2,
+    expense: postExpenseInput,
+    sheet: chosenSheetInput,
     //find out about checkbox
     //postIncome: postIncomeInput.value,
   };
 
   postRef.add(newPost);
+  var page = "budgetPage";
+  showPage(page);
 }
+
+
+// ========== CREATE USER ==========
+function createUser(){
+  let createUsernameInput = document.querySelector('#createUsername').value;
+  let createPasswordInput = document.querySelector('#createPassword').value;
+  let createEmailInput = document.querySelector('#createEmail').value;
+  console.log(createUsernameInput.value);
+if (createPasswordInput.length >= 6){
+firebase.auth().createUserWithEmailAndPassword(createEmailInput, createPasswordInput);
+alert("succes");
+}
+else {alert("Password must contain at least 6 characters");}
+}
+
+// ========== LOG IN ==========
+function logInUser(){
+  let emailInput = document.querySelector('#email').value;
+  let passwordInput = document.querySelector('#password').value;
+  // Listen on authentication state change
+  firebase.auth().onAuthStateChanged(function(user) {
+    let tabbar = document.querySelector('#tabbar-footer');
+    console.log(user);
+    if (user) { // if user exists and is authenticated
+        var page = "expensesPage";
+        showPage(page);
+
+      tabbar.classList.remove("hide");
+    } else { // if user is not logged in
+      alert("Incorrect username or password");
+    }
+  });
+}
+
+
+
 
 /*
 // ========== UPDATE ==========
