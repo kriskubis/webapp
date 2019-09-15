@@ -14,6 +14,7 @@ function showPage(pageId) {
   document.querySelector(`#${pageId}`).style.display = "block";
   location.href = `#${pageId}`;
   setActiveTab(pageId);
+
 }
 
 // sets active tabbar/ menu item
@@ -248,16 +249,161 @@ function logInUser(){
   });
 }
 
+// ========== CONVERTER ==========
+function convert(){
+function collectData(url, callback_Function){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if(this.readyState === 4 && this.status === 200){
+            callback_Function(this);
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+
+}
+
+
+function showData(jsonData){
+     var jsonElements= JSON.parse(jsonData.responseText);
+     let currencyResult = document.querySelector("#currencyAmount1").value * jsonElements.rates.DKK;
+    document.querySelector("#currencyAmount2").value = currencyResult;
+  //  document.querySelector("#currencyAmount2").value = jsonElements;
+}
 
 
 
-/*
-// ========== UPDATE ==========
+/* Main program */
+document.getElementById("convertButton").addEventListener("click", function() {
+    var currency1 = document.querySelector("#currency1").value;
+    var currency2 = document.querySelector("#currency2").value;
+    var amount1 = document.querySelector("#currencyAmount1").value;
+    var amount2 = document.querySelector("#currencyAmount2").value;
+    var url = `http://data.fixer.io/api/latest?access_key=437dd431bb3d693d631602b9e1df4edd&base = USD&symbols = ${currency1},${currency2}`
+    collectData(url, showData);
 
-function selectBill(billTitle, billPost, billAmount, billCurrency ) {}
+})
 
-function updateBill() {}
+}
 
-// ========== DELETE ==========
-function deleteBill(id) {}
-*/
+
+
+// ========== MATH FOR CHARTS !!! ==========
+// Income posts in budget
+let salBud = 4500; // Salary
+let suBud = 3200; //SU
+
+var incBud = (salBud + suBud); // Total income
+
+// Expense posts in budget
+let rentBud = 3200;
+let foodBud = 1800;
+let transBud = 600;
+let utilBud = 400;
+let uncatBud = 250; // Custom post: Uncategorised
+let medBud = 170; // Custom post: Medical
+let leisBud = 550; // Custom post: Leisure
+let otherBud = (uncatBud + medBud + leisBud);
+
+let expBud = (rentBud + foodBud + transBud + utilBud + otherBud); // Total expenses
+
+// Remaining money once expenses has been subtracted from the income
+var remainBud = (incBud - expBud);
+
+// Money spent - for overview
+let otherSpent = 625;
+let leisSpent = 240;
+let transSpent = 320;
+let foodSpent = 750;
+
+let spent = 4244;
+// ========== NEW BAR CHART !!! ==========
+function barChart(){
+  // Data
+  let data = {
+    labels: ['Food', 'Transport', 'Leisure', 'Other'],
+    series: [
+      [100, 100, 100, 100],
+      [(100/foodBud)*foodSpent, (100/transBud)*transSpent, (100/leisBud)*leisSpent, (100/otherBud)*otherSpent]
+    ]
+  };
+
+  // Styling
+  let options = {horizontalBars: true,
+  seriesBarDistance: 0,
+  chartPadding: 30,
+  axisX: {
+    showGrid: false,
+    showLabel: false,
+    offset: 10
+  },
+  axisY: {
+    offset: 80,
+    labelInterpolationFnc: function(value) {
+      return (value);
+    }
+  }};
+
+  // Responsiveness
+  let responsiveOptions = [
+    ['screen and (min-width: 320px)', {
+      chartPadding: 20
+    }],
+    ['screen and (min-width: 1024px)', {
+      chartPadding: 60
+    }]
+  ];
+
+  // Creating the chart
+    new Chartist.Bar('#chart1', data, options, responsiveOptions)
+};
+
+// ========== NEW PIE CHART !!! ==========
+function pieChart() {
+  // Data
+  let data = {
+    labels: ['Rent', 'Food', 'Transport', 'Utilities', 'Other', 'Remaining'],
+    series: [rentBud, foodBud, transBud, transBud, otherBud, remainBud]
+  };
+
+  // Styling
+  let options = {
+    labelInterpolationFnc: function(value) {
+      return value[0]
+    }
+  };
+
+  // Responsiveness
+  let responsiveOptions = [
+    ['screen and (min-width: 320px)', {
+      showLabel:false,
+      chartPadding: 20,
+      labelOffset: 70,
+      labelDirection: 'explode',
+      labelInterpolationFnc: function(value) {
+        return value;
+      }
+    }],
+    ['screen and (min-width: 1024px)', {
+      labelOffset: 20,
+      chartPadding: 60
+    }]
+  ];
+
+  // Creating the chart
+  new Chartist.Pie('#chart2', data, options, responsiveOptions);
+};
+
+barChart();
+pieChart();
+
+
+function whatever(){
+  document.querySelector("#incomeValue").innerHTML = incBud + " DKK";
+  document.querySelector("#remainingValue").innerHTML = remainBud + " DKK";
+  document.querySelector("#leftValue").innerHTML = incBud - spent + " DKK";
+    document.querySelector("#spentValue").innerHTML =spent + " DKK";
+
+}
+
+whatever();

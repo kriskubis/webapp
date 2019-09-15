@@ -342,6 +342,8 @@ button {
   background-color: white;
   border-radius: 20px;
   margin-top: 2%;
+  align-items: center;
+
 
 }
 
@@ -409,22 +411,81 @@ article{
 }
 
 
-/* ---------- NEW BILL---------- */
-#addBillForm{
-  margin-top: 5vh;
-  height: 70vh;
+#beInTheCenter{
+  margin: 1.5vh  auto auto auto;
 }
 
-.btn-grey{
-  background: #c9c9c9;
-  width: 50%;
+/* ---------- NEW BILL---------- */
+.bg-newBill {
+  /* The image used */
+  background-image: url("../img/new-bills-background.svg");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+#addBillForm{
+  margin-top: 5vh;
+  margin-bottom: 17vh;
+  height: 60vh;
+}
+
+#newBillPage input {
+  background-color: #EFEFEF;
+  margin: 0 3vh 0 3vh;
+  width: 80vw;
+  box-shadow: none;
+}
+
+
+h6 {
+  text-align: right;
+  margin-right: 5%;
+  font-style: italic;
+  font-weight: 600;
+}
+
 
 #newBillPage button{
   margin: 1vh;
 }
 
 #newBillPage label{
+  font-weight: 600;
+  margin: 3vh 3vh 0.5vh 3vh;
+}
+
+.addButton {
+  margin-top: 10vh;
+}
+
+.btn-grey{
+  background: #c9c9c9;
+  width: 45%;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#chosenPost {
+  background: #EFEFEF;
+  border-radius: 50px;
+  margin: 0 3vh 0 3vh;
+  width: 40vw;
+  font-size: 21px;
+  border: none;
+}
+
+#chosenCurrency {
+  background: #EFEFEF;
+  border-radius: 50px;
+  margin: 0 3vh 0 3vh;
+  width: 30vw;
+  font-size: 21px;
+  border: none;
 }
 
 /* ---------- BUDGET PAGE---------- */
@@ -436,13 +497,234 @@ article{
   margin: auto;
 }
 
-.expense h5 {
+.Expense h5 {
   color: darkred;
 }
 
-.income h5 {
+.Income h5 {
   color: green;
 }
+
+/* ---------- NEW POST---------- */
+.bg-newPost {
+  /* The image used */
+  background-image: url("../img/new-post-background.svg");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.addPostButton, .addPostButton button{
+  margin:   auto;
+  padding: 1.5vh;
+}
+
+#addPostForm{
+  margin-top: 5vh;
+  margin-bottom: 7vh;
+  height: 70vh;
+}
+
+#postForm{
+  margin-top: 5vh;
+  height: 70vh;
+}
+
+#newPostPage button{
+  margin: 1vh;
+}
+
+#newPostPage input {
+  background-color: #EFEFEF;
+  margin: 0 3vh 0 3vh;
+  width: 80vw;
+  box-shadow: none;
+  box-shadow: none;
+}
+
+#chosenSheet {
+  background: #EFEFEF;
+  border-radius: 50px;
+  margin: 0 3vh 0 3vh;
+  width: 30vw;
+  font-size: 21px;
+  border: none;
+}
+
+#budgetText{
+  margin-top: 5vh;
+}
+
+#postExpense {
+  background: #EFEFEF;
+  border-radius: 50px;
+  margin: 0 3vh 0 3vh;
+  width: 30vw;
+  font-size: 21px;
+  border: none;
+}
+
+#newPostPage label {
+  font-weight: 600;
+  margin: 1.5vh 3vh 0.5vh 3vh;
+}
+
+input, label {
+  display: block;
+}
+
+.addButton1 {
+  margin-top: 5vh;
+}
+
+#chartLabels{
+margin-top: 1vh;
+justify-content: space-around;
+
+}
+
+#chartLabels img{
+width: 50%;
+
+}
+
+#postLabels{
+  margin: 3vh 0 1vh 0;
+  font-size: 20px;
+}
+
+/* ---------- DROPDOWN ---------- */
+
+.dropdown {
+    text-align: center;
+    font-size: 25px;
+    padding: 15px;
+  }
+
+  .dropdown-menu {
+    width: 95vw;
+    margin: auto;
+    padding: 2%;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 6px 7px 7px -1px rgba(0, 0, 0, 0.26);
+    text-align: center;
+    font-size: 25px;
+    }
+
+/* ---------- NEW CHART STYLING !!! ---------- */
+/* -- Pie chart-- */
+.ct-series-a .ct-slice-pie {
+  fill: var(--mint);
+  stroke: white;
+  stroke-width: 4px;
+}
+
+.ct-series-b .ct-slice-pie {
+  fill: var(--magenta);
+  stroke: white;
+  stroke-width: 4px;
+}
+
+.ct-series-c .ct-slice-pie {
+  fill: var(--coin-orange);
+  stroke: white;
+  stroke-width: 4px;
+}
+
+.ct-series-d .ct-slice-pie {
+  fill: var(--lavender);
+  stroke: white;
+  stroke-width: 4px;
+}
+
+.ct-series-e .ct-slice-pie {
+  fill: var(--baby-blue);
+  stroke: white;
+  stroke-width: 4px;
+}
+
+.ct-series-f .ct-slice-pie {
+  fill: lightgrey;
+  stroke: white;
+  stroke-width: 4px;
+}
+
+/* -- Bar chart-- */
+.ct-series-a .ct-bar {
+  stroke: lightgrey;
+  stroke-width: 20px;
+  stroke-linecap: round;
+}
+
+.ct-series-b .ct-bar {
+  stroke: var(--magenta);
+  stroke-width: 20px;
+  stroke-linecap: round;
+}
+
+/* ---------- CONVERTER PAGE---------- */
+
+.converterPage h2 {
+  text-align: center;
+  margin-top: 2vh;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.converterPage label {
+  margin: 0 0 0 1vh;
+}
+
+#currency1 {
+  background-color: var(--blue);
+  color: white;
+  font-size: 22px;
+  height: 5.5vh;
+  width: 15vh;
+  text-align: center;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  display: table-cell;
+  vertical-align:middle;
+}
+
+#currency2 {
+  background-color: var(--blue);
+  color: white;
+  font-size: 22px;
+  height: 5.5vh;
+  width: 15vh;
+  text-align: center;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  display: table-cell;
+  vertical-align:middle;
+}
+
+#currencyAmount1 {
+  margin: 2vh auto;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+#currencyAmount2 {
+  margin: 2vh auto;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+#convertButton {
+margin: 3vh 0 5vh 9.5vh;
+
+}
+
+
 /* ---------- FOOTER ---------- */
 
 #tabbar-footer{
