@@ -1,5 +1,36 @@
 "use strict";
 
+// ========== MATH FOR CHARTS ==========
+// Income posts in budget
+let salBud = 4500; // Salary
+let suBud = 3200; //SU
+
+let incBud = (salBud + suBud); // Total income
+
+// Expense posts in budget
+let rentBud = 3200;
+let foodBud = 1800;
+let transBud = 600;
+let utilBud = 400;
+let uncatBud = 250; // Custom post: Uncategorised
+let medBud = 170; // Custom post: Medical
+let leisBud = 550; // Custom post: Leisure
+let otherBud = (uncatBud + medBud + leisBud);
+
+let expBud = (rentBud + foodBud + transBud + utilBud + otherBud); // Total expenses
+
+// Remaining money once expenses has been subtracted from the income
+let remainBud = (incBud - expBud);
+
+// Money spent - for overview
+let otherSpent = 625;
+let leisSpent = 240;
+let transSpent = 320;
+let foodSpent = 750;
+
+let spent = 4244;
+
+
 ///////////// THIS IS THE SPA FUNCTION //////////////////////////////////
 function hideAllPages() {
   let pages = document.querySelectorAll(".page");
@@ -14,7 +45,8 @@ function showPage(pageId) {
   document.querySelector(`#${pageId}`).style.display = "block";
   location.href = `#${pageId}`;
   setActiveTab(pageId);
-
+  barChart();
+  pieChart();
 }
 
 // sets active tabbar/ menu item
@@ -32,7 +64,7 @@ function setActiveTab(pageId) {
 
 // set default page
 function setDefaultPage() {
-  var page = "loginPage";
+  var page = "expensesPage";
   if (location.hash) {
     page = location.hash.slice(1);
   }
@@ -40,16 +72,8 @@ function setDefaultPage() {
 }
 
 setDefaultPage();
-// function showLoader(show) {
-//   let loader = document.querySelector('#loader');
-//   if (show) {
-//     loader.classList.remove("hide");
-//   } else {
-//     loader.classList.add("hide");
-//   }
-// }
 
-// Your web app's Firebase configuration
+// Our web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCrByQhB5S3AjMN2R8YfyKyoqO4SIC32ik",
   authDomain: "piggybankwebapp.firebaseapp.com",
@@ -59,14 +83,15 @@ const firebaseConfig = {
   messagingSenderId: "128978077012",
   appId: "1:128978077012:web:b0df47522c64bc593f74c1"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Database with the collections: bills, posts & users
 const db = firebase.firestore();
 const billRef = db.collection("bills");
 const postRef = db.collection("posts");
 const userRef = db.collection("users");
-
 
 // Firebase UI configuration
 const uiConfig = {
@@ -76,10 +101,7 @@ const uiConfig = {
   ],
   signInSuccessUrl: '#expensesPage',
 };
-
-
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-
 
 
 // Listen on authentication state change
@@ -95,126 +117,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
 });
-
-
-// sign out user
-function logout() {
-  firebase.auth().signOut();
-}
-
-// ========== CREATE BILLS ==========
-// watch the database ref for changes
-
-billRef.orderBy("time","desc").onSnapshot(function(snapshotData) {
-  let bills = snapshotData.docs;
-  appendBill(bills);
-});
-
-
-
-// append posts to the DOM
-function appendBill(bills) {
-  let htmlTemplate = "";
-  for (let bill of bills) {
-    console.log(bill.id);
-    htmlTemplate += `
-    <article class="row entry">
-        <div class="col-2">
-          <div class="billImage">
-          </div>
-        </div>
-        <div class="col-6 text-left">
-          <h4>${bill.data().title}</h4>
-          <span class="tag ${bill.data().post}">${bill.data().post}</span>
-        </div>
-        <div class="col-4">
-          <h5>${bill.data().amount} ${bill.data().currency}</h5>
-        </div>
-    </article>
-    `;
-  }
-  document.querySelector('#bills').innerHTML = htmlTemplate;
-}
-
-
-// ========== CREATE  BILLS==========
-// add a new user to firestore (database)
-function addBill() {
-  // references to the input fields
-  let billTitleInput = document.querySelector('#billTitle').value;
-  let billPostInput = document.querySelector('#chosenPost').value;
-  let billAmountInput = document.querySelector('#billAmount').value;
-  let billCurrencyInput = document.querySelector('#chosenCurrency').value;
-  let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-  console.log(billTitleInput.value);
-
-  db.collection("bills").add ({
-    title: billTitleInput,
-    amount: billAmountInput,
-    post: billPostInput,
-    currency: billCurrencyInput,
-    time: timestamp,
-  });
-  var page = "expensesPage";
-  showPage(page);
-}
-
-
-// ========== POSTS ==========
-// watch the database ref for changes
-postRef.onSnapshot(function(snapshotData) {
-  let posts = snapshotData.docs;
-  appendPost(posts);
-});
-
-// append posts to the DOM
-function appendPost(posts) {
-  let htmlTemplate = "";
-  for (let post of posts) {
-    console.log(post.data().title);
-    htmlTemplate += `
-    <article class="row entry ${post.data().expense}">
-        <div class="col-8 text-left">
-          <h4>${post.data().title}</h4>
-        </div>
-        <div class="col-2">
-          <h5>${post.data().amount1}</h5>
-        </div>
-        <div class="col-2">
-          <h5>${post.data().amount2}</h5>
-        </div>
-    </article>
-    `;
-  }
-  document.querySelector('#posts').innerHTML = htmlTemplate;
-}
-
-// ========== CREATE POST ==========
-// add a new user to firestore (database)
-function addPost() {
-  // references to the input fields
-  let postTitleInput = document.querySelector('#postTitle').value;
-  let postAmountInput1 = document.querySelector('#postAmount1').value;
-  let postAmountInput2 = document.querySelector('#postAmount2').value;
-  let postExpenseInput = document.querySelector('#postExpense').value;
-  let chosenSheetInput = document.querySelector('#chosenSheet').value;
-  //let postIncomeInput = document.querySelector('#postIncome');
-  console.log(postTitleInput.value);
-
-  let newPost = {
-    title: postTitleInput,
-    amount1: postAmountInput1,
-    amount2: postAmountInput2,
-    expense: postExpenseInput,
-    sheet: chosenSheetInput,
-    //find out about checkbox
-    //postIncome: postIncomeInput.value,
-  };
-
-  postRef.add(newPost);
-  var page = "budgetPage";
-  showPage(page);
-}
 
 
 // ========== CREATE USER ==========
@@ -249,6 +151,121 @@ function logInUser(){
   });
 }
 
+// ========== LOG OUT ==========
+/*
+// sign out user (Not yet implemented)
+function logout() {
+  firebase.auth().signOut();
+}
+*/
+
+// ========== CREATE BILLS ==========
+// watch the database ref for changes
+
+billRef.orderBy("time","desc").onSnapshot(function(snapshotData) {
+  let bills = snapshotData.docs;
+  appendBill(bills);
+});
+
+// append posts to the DOM
+function appendBill(bills) {
+  let htmlTemplate = "";
+  for (let bill of bills) {
+    console.log(bill.id);
+    htmlTemplate += `
+    <article class="row entry">
+        <div class="col-2">
+          <div class="billImage">
+          </div>
+        </div>
+        <div class="col-6 text-left">
+          <h4>${bill.data().title}</h4>
+          <span class="tag ${bill.data().post}">${bill.data().post}</span>
+        </div>
+        <div class="col-4">
+          <h5>${bill.data().amount} ${bill.data().currency}</h5>
+        </div>
+    </article>
+    `;
+  }
+  document.querySelector('#bills').innerHTML = htmlTemplate;
+}
+
+
+// add a new bill to firestore (database)
+function addBill() {
+  // references to the input fields
+  let billTitleInput = document.querySelector('#billTitle').value;
+  let billPostInput = document.querySelector('#chosenPost').value;
+  let billAmountInput = document.querySelector('#billAmount').value;
+  let billCurrencyInput = document.querySelector('#chosenCurrency').value;
+  let timestamp = firebase.firestore.FieldValue.serverTimestamp();
+  console.log(billTitleInput.value);
+
+  db.collection("bills").add ({
+    title: billTitleInput,
+    amount: billAmountInput,
+    post: billPostInput,
+    currency: billCurrencyInput,
+    time: timestamp,
+  });
+  var page = "expensesPage";
+  showPage(page);
+}
+
+
+// ========== CREATE POSTS ==========
+// watch the database ref for changes
+postRef.onSnapshot(function(snapshotData) {
+  let posts = snapshotData.docs;
+  appendPost(posts);
+});
+
+// append posts to the DOM
+function appendPost(posts) {
+  let htmlTemplate = "";
+  for (let post of posts) {
+    console.log(post.data().title);
+    htmlTemplate += `
+    <article class="row entry ${post.data().expense}">
+        <div class="col-8 text-left">
+          <h4>${post.data().title}</h4>
+        </div>
+        <div class="col-2">
+          <h5>${post.data().amount1}</h5>
+        </div>
+        <div class="col-2">
+          <h5>${post.data().amount2}</h5>
+        </div>
+    </article>
+    `;
+  }
+  document.querySelector('#posts').innerHTML = htmlTemplate;
+}
+
+// add a new post to firestore (database)
+function addPost() {
+  // references to the input fields
+  let postTitleInput = document.querySelector('#postTitle').value;
+  let postAmountInput1 = document.querySelector('#postAmount1').value; //first currency (DKK)
+  let postAmountInput2 = document.querySelector('#postAmount2').value; //second currency (EUR)
+  let postExpenseInput = document.querySelector('#postExpense').value; //choose if expense or income
+  let chosenSheetInput = document.querySelector('#chosenSheet').value;
+  console.log(postTitleInput.value);
+
+  let newPost = {
+    title: postTitleInput,
+    amount1: postAmountInput1,
+    amount2: postAmountInput2,
+    expense: postExpenseInput,
+    sheet: chosenSheetInput,
+  };
+
+  postRef.add(newPost);
+  var page = "budgetPage";
+  showPage(page);
+}
+
 // ========== CONVERTER ==========
 function convert(){
 function collectData(url, callback_Function){
@@ -260,9 +277,7 @@ function collectData(url, callback_Function){
     };
     xhttp.open("GET", url, true);
     xhttp.send();
-
 }
-
 
 function showData(jsonData){
      var jsonElements= JSON.parse(jsonData.responseText);
@@ -271,53 +286,18 @@ function showData(jsonData){
   //  document.querySelector("#currencyAmount2").value = jsonElements;
 }
 
-
-
 /* Main program */
 document.getElementById("convertButton").addEventListener("click", function() {
-    var currency1 = document.querySelector("#currency1").value;
-    var currency2 = document.querySelector("#currency2").value;
-    var amount1 = document.querySelector("#currencyAmount1").value;
-    var amount2 = document.querySelector("#currencyAmount2").value;
-    var url = `http://data.fixer.io/api/latest?access_key=437dd431bb3d693d631602b9e1df4edd&base = USD&symbols = ${currency1},${currency2}`
+    let currency1 = document.querySelector("#currency1").value;
+    let currency2 = document.querySelector("#currency2").value;
+    let amount1 = document.querySelector("#currencyAmount1").value;
+    let amount2 = document.querySelector("#currencyAmount2").value;
+    let url = `http://data.fixer.io/api/latest?access_key=437dd431bb3d693d631602b9e1df4edd&base = USD&symbols = ${currency1},${currency2}`
     collectData(url, showData);
-
 })
-
 }
 
-
-
-// ========== MATH FOR CHARTS !!! ==========
-// Income posts in budget
-let salBud = 4500; // Salary
-let suBud = 3200; //SU
-
-var incBud = (salBud + suBud); // Total income
-
-// Expense posts in budget
-let rentBud = 3200;
-let foodBud = 1800;
-let transBud = 600;
-let utilBud = 400;
-let uncatBud = 250; // Custom post: Uncategorised
-let medBud = 170; // Custom post: Medical
-let leisBud = 550; // Custom post: Leisure
-let otherBud = (uncatBud + medBud + leisBud);
-
-let expBud = (rentBud + foodBud + transBud + utilBud + otherBud); // Total expenses
-
-// Remaining money once expenses has been subtracted from the income
-var remainBud = (incBud - expBud);
-
-// Money spent - for overview
-let otherSpent = 625;
-let leisSpent = 240;
-let transSpent = 320;
-let foodSpent = 750;
-
-let spent = 4244;
-// ========== NEW BAR CHART !!! ==========
+// ========== BAR CHART ==========
 function barChart(){
   // Data
   let data = {
@@ -358,7 +338,7 @@ function barChart(){
     new Chartist.Bar('#chart1', data, options, responsiveOptions)
 };
 
-// ========== NEW PIE CHART !!! ==========
+// ========== PIE CHART ==========
 function pieChart() {
   // Data
   let data = {
@@ -394,16 +374,19 @@ function pieChart() {
   new Chartist.Pie('#chart2', data, options, responsiveOptions);
 };
 
-barChart();
-pieChart();
+// Timeout for charts to load data
+setTimeout(function(){
+  barChart();
+  pieChart();
+}, 3000);
 
 
-function whatever(){
+// Budget overviews
+function incRemain(){
   document.querySelector("#incomeValue").innerHTML = incBud + " DKK";
   document.querySelector("#remainingValue").innerHTML = remainBud + " DKK";
   document.querySelector("#leftValue").innerHTML = incBud - spent + " DKK";
     document.querySelector("#spentValue").innerHTML =spent + " DKK";
-
 }
 
-whatever();
+incRemain();

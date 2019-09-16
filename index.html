@@ -13,21 +13,17 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="img/piggy.png" />
 </head>
 
 <body>
   <header>
-
   </header>
 
   <main id="pages">
 
-
     <!-- Login Page -->
     <section id="loginPage" class="page bg-login">
-      <img src="" alt="">
-
       <div class="container-fluid">
         <div class="row vh-10">
           <div class="col-sm col-12 text-right">
@@ -37,9 +33,10 @@
         </div>
         <div class="row vh-50">
           <div class="col-sm col-12 text-center">
+            <!-- COIN ANIMATION -->
             <div id="coin1" class=""></div>
             <div id="coin2" class=""></div>
-            <img id="logo" src="img/piggy.png" alt="piggy goes here">
+            <img id="logo" src="img/piggy.png" alt="piggy bank logo">
             <h1>Piggy Bank</h1>
           </div>
         </div>
@@ -48,9 +45,8 @@
         <div class="col-sm col-12 text-center">
           <div class="form">
             <form>
-              <!--<button type="button" name="button" onclick="logIn()">Log</button>-->
-              <input id="email" class="whiteField" type="text" placeholder="Email" required></input>
-              <input id="password" class="whiteField" type="password" placeholder="Password" required></input>
+              <input id="email" class="whiteField" type="text" placeholder="Email" required>
+              <input id="password" class="whiteField" type="password" placeholder="Password" required>
               <button class="btn-blue" type="button" onclick="logInUser()" name="button">Log In</button>
             </form>
             <p>or <br> Log in with <a href="facebook.com"><b>Facebook</b></a></p>
@@ -59,7 +55,6 @@
       </div>
       <div class="row copyright vh-5">
         <p>&copy; 2019, PiggyCo.</p>
-      </div>
       </div>
     </section>
 
@@ -80,10 +75,9 @@
           <div class="col-sm col-12 text-center">
             <div class="form">
               <form>
-                <!--<button type="button" name="button" onclick="logIn()">Log</button>-->
-                <input id="createUsername" class="whiteField" type="text" placeholder="Username" required></input>
-                <input id="createPassword" class="whiteField" type="password" placeholder="Password" required></input>
-                <input id="createEmail" class="whiteField" type="mail" placeholder="E-mail" required></input>
+                <input id="createUsername" class="whiteField" type="text" placeholder="Username" required>
+                <input id="createPassword" class="whiteField" type="password" placeholder="Password" required>
+                <input id="createEmail" class="whiteField" type="email" placeholder="E-mail" required>
                 <button class="btn-blue" type="button" name="button" onclick="createUser()">Create</button>
               </form>
               <p>or <br> Log in with <a href="facebook.com"><b>Facebook</b></a></p>
@@ -106,29 +100,27 @@
         </div>
         <div class="row vh-50">
           <div id="monthlyOverview" class="whiteContainer">
-<div class="row">
-  <div class="col-6 text-center">
-    <h5>Left</h5>
-    <h5 id="leftValue"></h5>
-  </div>
-  <div class="col-6 text-center">
-    <h5>Spent</h5>
-    <h5 id="spentValue"></h5>
-  </div>
-
-
-</div>
-<div class="row">
-<h2  id="beInTheCenter">September 2019</h2>
-</div>
-<div class="row">
-  <!-- New bar chart !!!!!!!!!!!!!!!!!!!!!!! -->
-  <div class="ct-chart-bar ct-golden-section" id="chart1"></div>
-</div>
+            <div class="row">
+              <div class="col-6 text-center">
+                <h5>Left</h5>
+                <h5 id="leftValue"></h5>
+                <!-- JAVASCRIPT MATH -->
+              </div>
+              <div class="col-6 text-center">
+                <h5>Spent</h5>
+                <h5 id="spentValue"></h5>
+                <!-- JAVASCRIPT MATH -->
+              </div>
             </div>
-
+            <div class="row">
+              <h2 id="beInTheCenter">September 2019</h2>
+            </div>
+            <div class="row">
+              <!-- BAR CHART -->
+              <div class="ct-chart-bar ct-golden-section" id="chart1"></div>
+            </div>
           </div>
-
+        </div>
         <div class="row">
           <div id="recentActivities">
             <h3>Recent Activity</h3>
@@ -140,7 +132,6 @@
           <section id="bills" class="bill-container text-center">
           </section>
         </div>
-      </div>
       </div>
     </section>
 
@@ -179,7 +170,7 @@
                     <option value="DKK">DKK</option>
                     <option value="AUD">AUD</option>
                     <option value="EUR">EUR</option>
-                    <option value="SVK">SVK</option>
+                    <option value="SEK">SEK</option>
                   </select>
                 </div>
               </div>
@@ -202,15 +193,15 @@
         <h2>Budget</h2>
       </div>
       <div class="dropdown">
-  <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Main
-  </div>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Hobbies</a>
-    <a class="dropdown-item" href="#">Medical</a>
-    <a class="dropdown-item" href="#">Add new</a>
-  </div>
-</div>
+        <div class="dropdown-toggle" role="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Main
+        </div>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Hobbies</a>
+          <a class="dropdown-item" href="#">Medical</a>
+          <a class="dropdown-item" href="#">Add new</a>
+        </div>
+      </div>
       <div id="budgetGraph" class="whiteContainer">
         <div class="row">
           <div class="col-6 text-center">
@@ -223,48 +214,33 @@
           </div>
         </div>
         <div class="row">
-
-
-        <!-- New pie chart !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-        <div class="ct-chart-pie ct-golden-section" id="chart2"></div>
-      </div>
-      <div id="chartLabels" class="row">
-
-
-
-        <div class="col-2 text-center">
-              <img src="img/settings.png" alt="">
-          <p>Rent</p>
-
+          <!-- PIE CHART -->
+          <div class="ct-chart-pie ct-golden-section" id="chart2"></div>
         </div>
-
-        <div class="col-2 text-center">
-            <img src="img/settings.png" alt="">
-          <p>Food</p>
-
-        </div>
-
-        <div class="col-2 text-center">
-            <img src="img/settings.png" alt="">
-          <p>Transp.</p>
-
-        </div>
-
-        <div class="col-2 text-center">
-              <img src="img/settings.png" alt="">
-          <p>Utilities</p>
-
-        </div>
-
-        <div class="col-2 text-center">
-            <img src="img/settings.png" alt="">
-          <p>Other</p>
-
-        </div>
-
-
-      </div>
+        <div id="chartLabels" class="row">
+          <!-- CHART DESCRIPTIONS -->
+          <div class="col-2 text-center">
+            <img src="img/mint.png" alt="indicator">
+            <p>Rent</p>
           </div>
+          <div class="col-2 text-center">
+            <img src="img/magenta.png" alt="indicator">
+            <p>Food</p>
+          </div>
+          <div class="col-2 text-center">
+            <img src="img/coinorange.png" alt="indicator">
+            <p>Transp.</p>
+          </div>
+          <div class="col-2 text-center">
+            <img src="img/lavender.png" alt="indicator">
+            <p>Utilities</p>
+          </div>
+          <div class="col-2 text-center">
+            <img src="img/babyblue.png" alt="indicator">
+            <p>Other</p>
+          </div>
+        </div>
+      </div>
       <div id="budgetPosts">
         <section id="defaultPosts" class="defaultPost-container">
           <div id="postLabels" class="row">
@@ -272,91 +248,87 @@
             <div class="col-2">DKK</div>
             <div class="col-2">EUR</div>
           </div>
+          <!-- DEFAULT POSTS -->
           <article class="row entry Income">
-              <div class="col-8 text-left">
-                <h4>SU</h4>
-              </div>
-              <div class="col-2">
-                <h5>5200</h5>
-              </div>
-              <div class="col-2">
-                <h5>0</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>SU</h4>
+            </div>
+            <div class="col-2">
+              <h5>5200</h5>
+            </div>
+            <div class="col-2">
+              <h5>0</h5>
+            </div>
           </article>
-
           <article class="row entry Income">
-              <div class="col-8 text-left">
-                <h4>Salary</h4>
-              </div>
-              <div class="col-2">
-                <h5>1200</h5>
-              </div>
-              <div class="col-2">
-                <h5>0</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>Salary</h4>
+            </div>
+            <div class="col-2">
+              <h5>1200</h5>
+            </div>
+            <div class="col-2">
+              <h5>0</h5>
+            </div>
           </article>
-
           <article class="row entry Expense">
-              <div class="col-8 text-left">
-                <h4>Rent</h4>
-              </div>
-              <div class="col-2">
-                <h5>3800</h5>
-              </div>
-              <div class="col-2">
-                <h5>0</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>Rent</h4>
+            </div>
+            <div class="col-2">
+              <h5>3800</h5>
+            </div>
+            <div class="col-2">
+              <h5>0</h5>
+            </div>
           </article>
-
           <article class="row entry Expense">
-              <div class="col-8 text-left">
-                <h4>Food</h4>
-              </div>
-              <div class="col-2">
-                <h5>1910</h5>
-              </div>
-              <div class="col-2">
-                <h5>130</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>Food</h4>
+            </div>
+            <div class="col-2">
+              <h5>1910</h5>
+            </div>
+            <div class="col-2">
+              <h5>130</h5>
+            </div>
           </article>
-
           <article class="row entry Expense">
-              <div class="col-8 text-left">
-                <h4>Transportation</h4>
-              </div>
-              <div class="col-2">
-                <h5>600</h5>
-              </div>
-              <div class="col-2">
-                <h5>400</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>Transportation</h4>
+            </div>
+            <div class="col-2">
+              <h5>600</h5>
+            </div>
+            <div class="col-2">
+              <h5>400</h5>
+            </div>
           </article>
-
           <article class="row entry Expense">
-              <div class="col-8 text-left">
-                <h4>Utilities</h4>
-              </div>
-              <div class="col-2">
-                <h5>200</h5>
-              </div>
-              <div class="col-2">
-                <h5>0</h5>
-              </div>
+            <div class="col-8 text-left">
+              <h4>Utilities</h4>
+            </div>
+            <div class="col-2">
+              <h5>200</h5>
+            </div>
+            <div class="col-2">
+              <h5>0</h5>
+            </div>
           </article>
-
         </section>
+        <!-- CUSTOM POSTS FROM JAVASCRIPT-->
         <section id="posts" class="post-container"></section>
         <div class="row">
           <div class="text-center">
-            <div  class="col-6 text-center addPostButton">
-            <button  type="button" class="btn-blue" onclick="showPage('newPostPage')" name="button">Add new post</button>
-          </div>
+            <div class="col-6 text-center addPostButton">
+              <button type="button" class="btn-blue" onclick="showPage('newPostPage')" name="button">Add new post</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- New post page -->
+    <!-- NEW POST PAGE -->
     <section id="newPostPage" class="page bg-newPost">
       <div class="container-fluid">
         <div class="row banner vh-5 mrg-btm">
@@ -368,94 +340,88 @@
             <form id="postForm">
               <div>
                 <label>Post title*</label>
-              <input type="text" id="postTitle" required>
+                <input type="text" id="postTitle" required>
               </div>
               <div>
                 <label>Amount DKK*</label>
               </div>
-                <input type="number" id="postAmount1" required>
-                <div>
-                  <label>Amount EUR*</label>
-                </div>
-                <input type="number" id="postAmount2" required>
-
-                <div class="row">
-                  <div class="col-6">
-                    <div id="budgetText">
-                  <label>Budget sheet*</label>
-                </div>
-                <select id="chosenSheet" required>
-                  <option value="Main">Main</option>
-                  <option value="Leisure">Leisure</option>
-                  <option value="Medical">Medical</option>
-                </select>
+              <input type="number" id="postAmount1" required>
+              <div>
+                <label>Amount EUR*</label>
               </div>
-
+              <input type="number" id="postAmount2" required>
+              <div class="row">
+                <div class="col-6">
+                  <div class="budgetText">
+                    <label>Budget sheet*</label>
+                  </div>
+                  <select id="chosenSheet" required>
+                    <option value="Main">Main</option>
+                    <option value="Leisure">Leisure</option>
+                    <option value="Medical">Medical</option>
+                  </select>
+                </div>
                 <div>
                   <div class="col-6">
-                    <div id="budgetText">
-                  <label>Type*</label>
-                <select id="postExpense" required>
-                </div>
-                  <option value="Expense">Expense</option>
-                  <option value="Income">Income</option>
-                </select>
+                    <div class="budgetText">
+                      <label>Type*</label>
+                      <select id="postExpense" required>
+                        <option value="Expense">Expense</option>
+                        <option value="Income">Income</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="text-center addButton1">
+                <button type="button" class="btn-round btn-blue" name="button" onclick="addPost()">Add</button>
+                <button type="button" name="button" class="btn-round btn-grey" onclick="showPage('budgetPage')">Cancel</button>
               </div>
-                <!-- <input type="checkbox" id="income" placeholder="" required> -->
-                <div class="text-center addButton1">
-                  <button type="button" class="btn-round btn-blue" name="button" onclick="addPost()">Add</button>
-                  <button type="button" name="button" class="btn-round btn-grey" onclick="showPage('budgetPage')">Cancel</button>
-                </div>
             </form>
           </div>
         </div>
       </div>
-        <div class="row copyright vh-5">
-          <p>&copy; 2019, PiggyCo.</p>
-        </div>
+      <div class="row copyright vh-5">
+        <p>&copy; 2019, PiggyCo.</p>
       </div>
     </section>
 
-    <!-- Converter page -->
-      <section id="converterPage" class="page converterPage">
-        <div class="row banner vh-5 mrg-btm">
-          <h2>Converter</h2>
-        </div>
-        <div>
-          <h2>Convert</h2>
-          <form id="convertForm">
-            <label>From</label>
-              <div id="currency1" value="EUR">EUR</div>
-            <input type="number" id="currencyAmount1">
-            <label>To</label>
-              <div id="currency2" value="DKK">DKK</div>
-            <input type="number" id="currencyAmount2">
-            <button id="convertButton" type="button" name="button" onclick="convert()">Convert</button>
-          </form>
-        </div>
-      </section>
+    <!-- CONVERTER PAGE -->
+    <section id="converterPage" class="page converterPage">
+      <div class="row banner vh-5 mrg-btm">
+        <h2>Converter</h2>
+      </div>
+      <div>
+        <h2>Convert</h2>
+        <form id="convertForm">
 
+          <div id="currency1">EUR</div>
+          <input type="number" id="currencyAmount1">
 
-<!-- Settings page -->
+          <div id="currency2">DKK</div>
+          <input type="number" id="currencyAmount2">
+          <button id="convertButton" type="button" name="button" onclick="convert()">Convert</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SETTINGS PAGE (PICTURE) -->
     <section id="settingsPage" class="page text-center">
       <div class="row banner vh-5 mrg-btm">
         <h2>Settings</h2>
       </div>
-      <img src="img/settings.svg" alt="" class="vw-100">
+      <img src="img/settings.svg" alt="mockSettings" class="vw-100">
     </section>
-
-
   </main>
 
+  <!-- TABBAR NAVIGATION (HIDDEN ON LOGIN PAGE)-->
   <footer>
     <nav id="tabbar-footer" class="tabbar hide">
       <div class="row text-center">
-        <a href="#expensesPage" onclick="showPage('expensesPage')"><img src="img/expenses.png"></a>
-        <a href="#budgetPage" onclick="showPage('budgetPage')"><img src="img/budget.png"></a>
-        <a href="#converterPage" onclick="showPage('converterPage')"><img src="img/converter.png"></a>
-        <a href="#settingsPage" onclick="showPage('settingsPage')"><img src="img/settings.png"></a>
+        <a href="#expensesPage" onclick="showPage('expensesPage')"><img src="img/expenses.png" alt="expenses icon"></a>
+        <a href="#budgetPage" onclick="showPage('budgetPage')"><img src="img/budget.png" alt="budget icon"></a>
+        <a href="#converterPage" onclick="showPage('converterPage')"><img src="img/converter.png" alt="converter icon"></a>
+        <a href="#settingsPage" onclick="showPage('settingsPage')"><img src="img/settings.png" alt="settings icon"></a>
       </div>
     </nav>
   </footer>

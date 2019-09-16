@@ -438,6 +438,7 @@ article{
   margin: 0 3vh 0 3vh;
   width: 80vw;
   box-shadow: none;
+  display: block;
 }
 
 
@@ -456,6 +457,7 @@ h6 {
 #newBillPage label{
   font-weight: 600;
   margin: 3vh 3vh 0.5vh 3vh;
+  display: block;
 }
 
 .addButton {
@@ -543,6 +545,7 @@ h6 {
   width: 80vw;
   box-shadow: none;
   box-shadow: none;
+  display: block;
 }
 
 #chosenSheet {
@@ -554,7 +557,7 @@ h6 {
   border: none;
 }
 
-#budgetText{
+.budgetText{
   margin-top: 5vh;
 }
 
@@ -570,9 +573,6 @@ h6 {
 #newPostPage label {
   font-weight: 600;
   margin: 1.5vh 3vh 0.5vh 3vh;
-}
-
-input, label {
   display: block;
 }
 
@@ -677,6 +677,11 @@ width: 50%;
 
 .converterPage label {
   margin: 0 0 0 1vh;
+  display: block;
+}
+
+.converterPage input {
+  display: block;
 }
 
 #currency1 {
@@ -755,3 +760,96 @@ background-color: var(--baby-blue);
 .hide{
   display: none;
 }
+
+/* ---------- MEDIA QUERIES ---------- */
+
+/* ---------- Galaxy S5---------- */
+@media only screen and (min-height: 640px) {
+  #budgetGraph {
+    height: 58vh;
+  }
+
+  #monthlyOverview {
+    height: 55vh;
+  }
+
+  #recentActivities {
+    display: block;
+    margin-top: 7vh;
+  }
+  #addBillForm {
+    height: 75vh;
+  }
+  #addPostForm {
+    height: 80vh;
+  }
+}
+
+/* ---------- Iphone 6/7/8---------- */
+@media only screen and (min-height: 640px) {
+  .entry {
+    height: 10vh;
+  }
+}
+
+/* ---------- Iphone 6/7/8 plus---------- */
+@media only screen and (min-height: 736px) {
+
+  #monthlyOverview {
+    height: 55vh;
+  }
+
+  #addBillForm {
+    height: 70vh;
+  }
+  #addPostForm {
+    height: 78vh;
+  }
+}
+
+/* ---------- Iphone X---------- */
+@media only screen and (min-height: 812px) {
+
+  #budgetGraph {
+    height: 48vh;
+  }
+
+  #monthlyOverview {
+    height: 45vh;
+  }
+
+  #recentActivities {
+    margin-top: 2vh;
+  }
+
+  #addBillForm {
+    height: 65vh;
+  }
+  #addPostForm {
+    height: 75vh;
+  }
+  }
+
+  /* ---------- Ipad---------- */
+  @media only screen and (min-height: 1024px) and (max-height: 1500px) {
+
+    #budgetGraph {
+      height: 65vh;
+    }
+
+    #monthlyOverview {
+      height: 60vh;
+    }
+
+    #recentActivities {
+      margin-top: 15vh;
+    }
+
+    #addPostForm {
+      height: 70vh;
+    }
+
+    .entry {
+      height: 9vh;
+    }
+  }
