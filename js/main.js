@@ -93,6 +93,7 @@ const billRef = db.collection("bills");
 const postRef = db.collection("posts");
 const userRef = db.collection("users");
 
+/*
 // Firebase UI configuration
 const uiConfig = {
   credentialHelper: firebaseui.auth.CredentialHelper.NONE,
@@ -102,7 +103,7 @@ const uiConfig = {
   signInSuccessUrl: '#expensesPage',
 };
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-
+*/
 
 // Listen on authentication state change
 firebase.auth().onAuthStateChanged(function(user) {
@@ -136,20 +137,28 @@ else {alert("Password must contain at least 6 characters");}
 function logInUser(){
   let emailInput = document.querySelector('#email').value;
   let passwordInput = document.querySelector('#password').value;
-  // Listen on authentication state change
-  firebase.auth().onAuthStateChanged(function(user) {
-    let tabbar = document.querySelector('#tabbar-footer');
-    console.log(user);
-    if (user) { // if user exists and is authenticated
-        var page = "expensesPage";
-        showPage(page);
+  firebase.auth().signInWithEmailAndPassword(emailInput, passwordInput).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
 
-      tabbar.classList.remove("hide");
-    } else { // if user is not logged in
-      alert("Incorrect username or password");
-    }
-  });
 }
+
+// Listen on authentication state change
+firebase.auth().onAuthStateChanged(function(user) {
+  let tabbar = document.querySelector('#tabbar-footer');
+  console.log(user);
+  if (user) { // if user exists and is authenticated
+      var page = "expensesPage";
+      showPage(page);
+
+    tabbar.classList.remove("hide");
+  } else { // if user is not logged in
+    alert("Incorrect username or password");
+  }
+});
 
 // ========== LOG OUT ==========
 /*
