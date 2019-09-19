@@ -128,7 +128,7 @@ function createUser(){
   console.log(createUsernameInput.value);
 if (createPasswordInput.length >= 6){
 firebase.auth().createUserWithEmailAndPassword(createEmailInput, createPasswordInput);
-alert("succes");
+alert("Success");
 }
 else {alert("Password must contain at least 6 characters");}
 }
@@ -143,7 +143,6 @@ function logInUser(){
   var errorMessage = error.message;
   // ...
 });
-
 }
 
 // Listen on authentication state change
